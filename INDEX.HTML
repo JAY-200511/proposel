@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special Proposal</title>
+    <style>
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #ffcccc;
+            overflow: hidden;
+        }
+        .container { 
+            margin-top: 5%;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #d63384;
+        }
+        img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #d63384;
+        }
+        /* Sunflower Animation */
+        .flower-container {
+            position: relative;
+            height: 300px;
+            display: none;
+        }
+        .sunflower {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            transition: width 2s ease-in-out, bottom 2s ease-in-out;
+        }
+        .show-flower {
+            width: 100px;
+            bottom: 0;
+        }
+        /* Love Message Animation */
+        .love-message {
+            display: none;
+            font-size: 2em;
+            font-weight: bold;
+            color: red;
+            position: absolute;
+            top: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .show-message {
+            opacity: 1;
+        }
+        /* Back Button */
+        .back-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="lofi-music.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Start Music Button -->
+    <button id="startMusicBtn" onclick="playMusic()">Click to Start Proposal 🎶</button>
+
+    <div class="container" style="display: none;">
+        <h1>Will You Be Mine Forever? 💖</h1>
+        <img src="photo palak .jpg" alt="Your Crush">  
+        <br><br>
+        <button class="btn" onclick="sayYes()">YES</button>
+        <button class="btn" onclick="sayNo()">NO</button>
+    </div>
+
+    <!-- Hidden Sunflower -->
+    <div class="flower-container">
+        <svg class="sunflower" viewBox="0 0 100 150">
+            <rect x="47" y="30" width="6" height="90" fill="green"></rect>
+            <ellipse cx="40" cy="80" rx="15" ry="10" fill="green"></ellipse>
+            <ellipse cx="60" cy="100" rx="15" ry="10" fill="green"></ellipse>
+            <circle cx="50" cy="20" r="10" fill="brown"></circle>
+            <circle cx="50" cy="6" r="8" fill="yellow"></circle>
+            <circle cx="38" cy="10" r="8" fill="yellow"></circle>
+            <circle cx="62" cy="10" r="8" fill="yellow"></circle>
+            <circle cx="50" cy="34" r="8" fill="yellow"></circle>
+            <circle cx="38" cy="28" r="8" fill="yellow"></circle>
+            <circle cx="62" cy="28" r="8" fill="yellow"></circle>
+            <circle cx="30" cy="20" r="8" fill="yellow"></circle>
+            <circle cx="70" cy="20" r="8" fill="yellow"></circle>
+        </svg>
+
+        <!-- Love Message under Sunflower -->
+        <div class="love-message">I Love You Palak ❤️</div>
+
+        <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function playMusic() {
+            let music = document.getElementById("bgMusic");
+            music.play().then(() => {
+                document.getElementById("startMusicBtn").style.display = "none"; 
+                document.querySelector(".container").style.display = "block"; 
+            }).catch(error => {
+                alert("Please click the button to allow music playback!");
+            });
+        }
+
+        function sayYes() {
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.flower-container').style.display = 'block';
+
+            setTimeout(() => {
+                document.querySelector('.sunflower').classList.add('show-flower');
+
+                // Show Love Message with Animation
+                setTimeout(() => {
+                    document.querySelector('.love-message').style.display = "block";
+                    document.querySelector('.love-message').classList.add('show-message');
+                }, 2000);
+
+                document.querySelector('.back-btn').style.display = 'inline-block'; 
+            }, 500);
+        }
+
+        function sayNo() {
+            document.body.innerHTML = `
+                <div style="text-align: center; padding: 10%; font-family: Arial;">
+                    <h1 style="color: red;">💔 Oh No! You clicked NO! 😢</h1>
+                    <p style="font-size: 20px; color: #333;">
+                        I knew this was a possibility, but my heart still hoped for a YES. 💔 <br>
+                        You mean a lot to me, and my feelings for you are real. 🥺 <br>
+                        But no matter what, I'll always wish you happiness! 😊 <br>
+                        If you ever change your mind, I'll be waiting... ❤️
+                    </p>
+                    <button onclick="goBack()" class="btn">Go Back</button>
+                </div>
+            `;
+        }
+
+        function goBack() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
